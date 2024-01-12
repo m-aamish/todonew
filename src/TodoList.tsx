@@ -41,6 +41,13 @@ export const TodoList: React.FC = () => {
     }
   };
 
+  const handleReset = () => {
+    // Filter out the locally added items and keep only the fetched items
+    setTodos((prevTodos) =>
+      prevTodos.filter((todo) => todo.id <= idCounter.current)
+    );
+  };
+
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       handleClick();
@@ -86,7 +93,12 @@ export const TodoList: React.FC = () => {
         onChange={(e) => setInput(e.currentTarget.value)}
         onKeyPress={handleKeyPress}
       />
-      <button onClick={handleClick}>Add</button>
+      <div>
+        <button onClick={handleClick}>Add</button>
+
+        <button onClick={handleReset} style={{marginLeft:'10px'}}>Reset</button>
+      </div>
+      
       <h1 style={{ fontSize: "20px", fontWeight: "bold", paddingTop: "10px" }}>
         Here is the List:
       </h1>
