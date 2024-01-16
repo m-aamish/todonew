@@ -4,7 +4,7 @@ import { Todo1 } from "./todo1"
 function App() {
   
   return (
-    <div>
+    <div className="App h-screen">
       <TodoList/>
     </div>
   )
