@@ -2,7 +2,7 @@
   "name": "todo",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://m-aamish.github.io/todonew",
+  "homepage": "https://m-aamish.github.io/todonew/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
@@ -20,6 +20,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "predeploy": "npm start",
+    "deploy": "Todonew -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
