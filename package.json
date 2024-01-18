@@ -20,8 +20,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "predeploy": "npm start",
-    "deploy": "Todonew -d build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -48,6 +48,7 @@
   "devDependencies": {
     "@types/uuid": "^9.0.7",
     "autoprefixer": "^10.4.16",
+    "gh-pages": "^6.1.1",
     "postcss": "^8.4.33",
     "tailwind-scrollbar": "^3.0.5",
     "tailwindcss": "^3.4.1"
