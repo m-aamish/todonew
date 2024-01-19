@@ -25,7 +25,7 @@ export const TodoList: React.FC = () => {
 
   const [lastId, setLastId] = useState(0);
   const [todos, setTodos] = useState<Item[]>([
-    {"id":1,"todo":"Do something nice for someone I care about","completed":true},{"id":2,"todo":"Memorize the fifty states and their capitals","completed":false},{"id":3,"todo":"Watch a classic movie","completed":false},{"id":4,"todo":"Contribute code or a monetary donation to an open-source software project","completed":false},{"id":5,"todo":"Solve a Rubik's cube","completed":false},{"id":6,"todo":"Bake pastries for me and neighbor","completed":false},{"id":7,"todo":"Go see a Broadway production","completed":false},{"id":8,"todo":"Write a thank you letter to an influential person in my life","completed":true},{"id":9,"todo":"Invite some friends over for a game night","completed":false},{"id":10,"todo":"Have a football scrimmage with some friends","completed":false},{"id":11,"todo":"Text a friend I haven't talked to in a long time","completed":false},{"id":12,"todo":"Organize pantry","completed":true},{"id":13,"todo":"Buy a new house decoration","completed":false},{"id":14,"todo":"Plan a vacation I've always wanted to take","completed":false},{"id":15,"todo":"Clean out car","completed":false},{"id":16,"todo":"Draw and color a Mandala","completed":true},{"id":17,"todo":"Create a cookbook with favorite recipes","completed":false},{"id":18,"todo":"Bake a pie with some friends","completed":false},{"id":19,"todo":"Create a compost pile","completed":true},{"id":20,"todo":"Take a hike at a local park","completed":true},{"id":21,"todo":"Take a class at local community center that interests you","completed":false},{"id":22,"todo":"Research a topic interested in","completed":false},{"id":23,"todo":"Plan a trip to another country","completed":true},{"id":24,"todo":"Improve touch typing","completed":false},{"id":25,"todo":"Learn Express.js","completed":false},{"id":26,"todo":"Learn calligraphy","completed":false},{"id":27,"todo":"Have a photo session with some friends","completed":false},{"id":28,"todo":"Go to the gym","completed":false},{"id":29,"todo":"Make own LEGO creation","completed":false},{"id":30,"todo":"Take cat on a walk","completed":false}
+    {"id":31,"todo":"Do something nice for someone I care about","completed":true},{"id":32,"todo":"Memorize the fifty states and their capitals","completed":false},{"id":33,"todo":"Watch a classic movie","completed":false},{"id":34,"todo":"Contribute code or a monetary donation to an open-source software project","completed":false},{"id":35,"todo":"Solve a Rubik's cube","completed":false},{"id":36,"todo":"Bake pastries for me and neighbor","completed":false},{"id":37,"todo":"Go see a Broadway production","completed":false},{"id":38,"todo":"Write a thank you letter to an influential person in my life","completed":true},{"id":39,"todo":"Invite some friends over for a game night","completed":false},{"id":40,"todo":"Have a football scrimmage with some friends","completed":false},{"id":41,"todo":"Text a friend I haven't talked to in a long time","completed":false},{"id":42,"todo":"Organize pantry","completed":true},{"id":43,"todo":"Buy a new house decoration","completed":false},{"id":44,"todo":"Plan a vacation I've always wanted to take","completed":false},{"id":45,"todo":"Clean out car","completed":false},{"id":46,"todo":"Draw and color a Mandala","completed":true},{"id":47,"todo":"Create a cookbook with favorite recipes","completed":false},{"id":48,"todo":"Bake a pie with some friends","completed":false},{"id":49,"todo":"Create a compost pile","completed":true},{"id":50,"todo":"Take a hike at a local park","completed":true},{"id":51,"todo":"Take a class at local community center that interests you","completed":false},{"id":52,"todo":"Research a topic interested in","completed":false},{"id":53,"todo":"Plan a trip to another country","completed":true},{"id":54,"todo":"Improve touch typing","completed":false},{"id":55,"todo":"Learn Express.js","completed":false},{"id":56,"todo":"Learn calligraphy","completed":false},{"id":57,"todo":"Have a photo session with some friends","completed":false},{"id":58,"todo":"Go to the gym","completed":false},{"id":59,"todo":"Make own LEGO creation","completed":false},{"id":60,"todo":"Take cat on a walk","completed":false}
   ]);
   const [currentTodo, setCurrentTodo] = useState("");
   const [editTodo, setEditTodo] = useState("");
@@ -57,10 +57,13 @@ export const TodoList: React.FC = () => {
 
   const handleReset = () => {
     
-    setTodos((prevTodos) =>
+    // setTodos((prevTodos) =>
 
-      prevTodos.filter((todo) => todo.id <= idCounter.current)
-    );
+    //   prevTodos.filter((todo) => todo.id <= idCounter.current)
+    // );
+    setTodos([]);
+    // Optionally, if you want to reset the idCounter as well
+    idCounter.current = 0;
   };
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -122,26 +125,13 @@ export const TodoList: React.FC = () => {
   useEffect(() => {
     const savedTodos = localStorage.getItem("todos");
     let parsedTodos = JSON.parse(savedTodos || "[]");
+  
     if (parsedTodos.length) {
+      // Update todos and idCounter
       setTodos(parsedTodos);
-      setLastId(parsedTodos[parsedTodos.length - 1].id);
+      idCounter.current = parsedTodos[parsedTodos.length - 1].id + 1;
     }
-
-    const fetchData = async () => {
-      try {
-        const response = await fetch('https://dummyjson.com/todos');
-        if (!response.ok) {
-          throw new Error(`HTTP error ${response.status}`);
-        }
-        const data = await response.json();
-        setTodos(updateTodos(todos, data));
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
-    fetchData();
-  }, ['https://dummyjson.com/todos']);
+  }, []);
 
     useEffect(() => {
         localStorage.setItem("todos", JSON.stringify(todos))
